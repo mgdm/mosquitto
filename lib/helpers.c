@@ -252,31 +252,15 @@ libmosq_EXPORT int mosquitto_subscribe_callback(
 		return MOSQ_ERR_NOMEM;
 	}
 
-	if(will){
-		rc = mosquitto_will_set(mosq, will->topic, will->payloadlen, will->payload, will->qos, will->retain);
-		if(rc){
-			mosquitto_destroy(mosq);
-			return rc;
-		}
-	}
-	if(username){
-		rc = mosquitto_username_pw_set(mosq, username, password);
-		if(rc){
-			mosquitto_destroy(mosq);
-			return rc;
-		}
-	}
-	if(tls){
-		rc = mosquitto_tls_set(mosq, tls->cafile, tls->capath, tls->certfile, tls->keyfile, tls->pw_callback);
-		if(rc){
-			mosquitto_destroy(mosq);
-			return rc;
-		}
-		rc = mosquitto_tls_opts_set(mosq, tls->cert_reqs, tls->tls_version, tls->ciphers);
-		if(rc){
-			mosquitto_destroy(mosq);
-			return rc;
-		}
+	rc = mosquitto__helper_initialise(
+			mosq, &cb_userdata,
+			host, port,
+			client_id, keepalive, clean_session,
+			username, password,
+			will, tls);
+
+	if(rc > 0) {
+		return rc;
 	}
 
 	mosquitto_connect_callback_set(mosq, on_connect_subscribe);
