@@ -61,9 +61,7 @@ static void on_connect_publish(struct mosquitto *mosq, void *obj, int rc)
 	int result;
 	int i;
 
-    fprintf(stderr, "Got %d messages to publish\n", userdata->msg_count);
 	for (i=0; i < userdata->msg_count; i++){
-		fprintf(stderr, "Publishing message %d to topic %s\n", i, userdata->messages[i]->topic);
 		current_msg = userdata->messages[i];
 
 		result = mosquitto_publish(
