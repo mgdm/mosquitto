@@ -74,7 +74,7 @@ static void on_connect_publish(struct mosquitto *mosq, void *obj, int rc)
 		}
 	}
 
-    mosquitto_disconnect(mosq);
+	mosquitto_disconnect(mosq);
 }
 
 static void on_message_callback(struct mosquitto *mosq, void *obj, const struct mosquitto_message *message)
@@ -307,8 +307,8 @@ libmosq_EXPORT int mosquitto_publish_multiple(
 		return rc;
 	}
 
-    cb_userdata.messages = messages;
-    cb_userdata.msg_count = message_count;
+	cb_userdata.messages = messages;
+	cb_userdata.msg_count = message_count;
 
 	mosquitto_connect_callback_set(mosq, on_connect_publish);
 	
@@ -325,8 +325,8 @@ libmosq_EXPORT int mosquitto_publish_multiple(
 
 libmosq_EXPORT int mosquitto_publish_single(
 		const char *topic,
-        const void *payload,
-        int payloadlen,
+		const void *payload,
+		int payloadlen,
 		int qos,
 		const char *host,
 		int port,
