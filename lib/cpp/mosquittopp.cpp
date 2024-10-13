@@ -176,6 +176,50 @@ mosqpp_EXPORT int subscribe_callback(
 			will, tls);
 }
 
+mosqpp_EXPORT int publish_single(
+		const char *topic,
+		const void *payload,
+		int payloadlen,
+		int qos,
+		const char *host,
+		int port,
+		const char *client_id,
+		int keepalive,
+		bool clean_session,
+		const char *username,
+		const char *password,
+		const struct libmosquitto_will *will,
+		const struct libmosquitto_tls *tls)
+{
+	return mosquitto_publish_single(
+			topic,
+			payload, payloadlen,
+			qos, host, port,
+			client_id, keepalive, clean_session,
+			username, password,
+			will, tls);
+}
+
+mosqpp_EXPORT int publish_multiple(
+		struct mosquitto_message **messages,
+		int message_count,
+		const char *host,
+		int port,
+		const char *client_id,
+		int keepalive,
+		bool clean_session,
+		const char *username,
+		const char *password,
+		const struct libmosquitto_will *will,
+		const struct libmosquitto_tls *tls)
+{
+	return mosquitto_publish_multiple(
+			messages, message_count,
+			host, port,
+			client_id, keepalive, clean_session,
+			username, password,
+			will, tls);
+}
 
 mosquittopp::mosquittopp(const char *id, bool clean_session)
 {
