@@ -59,6 +59,8 @@ c : test-compile
 	./03-publish-qos0.py $@/03-publish-qos0.test
 	./03-request-response-correlation.py $@/03-request-response-correlation.test
 	./03-request-response.py $@/03-request-response.test
+	./03-publish-helper-single.py $@/03-publish-helper-single.test
+	./03-publish-helper-multiple.py $@/03-publish-helper-multiple.test
 	./04-retain-qos0.py $@/04-retain-qos0.test
 ifeq ($(WITH_TLS),yes)
 	#./08-ssl-fake-cacert.py $@/08-ssl-fake-cacert.test
